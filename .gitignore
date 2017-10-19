@@ -1,0 +1,12 @@
+/.bundle
+*.db
+/tmp
+/log
+
+*.gem
+*.rbc
+.bundle
+.config
+coverage
+rdoc
+tmp
