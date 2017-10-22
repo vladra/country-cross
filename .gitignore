@@ -1,5 +1,4 @@
 /.bundle
-*.db
 /tmp
 /log
 
@@ -10,3 +9,5 @@
 coverage
 rdoc
 tmp
+
+db.sqlite3

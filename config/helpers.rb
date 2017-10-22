@@ -3,7 +3,7 @@ def prod?
 end
 
 def dev?
-  ENV['RACK_ENV'] == 'production'
+  ENV['RACK_ENV'] == 'development'
 end
 
 def load_dir(dir)

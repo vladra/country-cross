@@ -9,41 +9,56 @@ migrate = lambda do |env, version|
   Sequel::Migrator.apply(DB, 'migrate', version)
 end
 
-desc 'Migrate test database to latest version'
-task :test_up do
-  migrate.call('test', nil)
-end
+namespace :db do
+  desc 'Seed database'
+  task :seed do
+    require_relative 'config/db'
+    require_relative 'tasks/seeds'
+    seed!
+  end
 
-desc 'Migrate test database all the way down'
-task :test_down do
-  migrate.call('test', 0)
-end
+  namespace :migrate do
+    desc 'Migrate test database to latest version'
+    task :test do
+      migrate.call('test', nil)
+    end
 
-desc 'Migrate test database all the way down and then back up'
-task :test_bounce do
-  migrate.call('test', 0)
-  Sequel::Migrator.apply(DB, 'migrate')
-end
+    desc 'Migrate development database to latest version'
+    task :dev do
+      migrate.call('development', nil)
+    end
 
-desc 'Migrate development database to latest version'
-task :dev_up do
-  migrate.call('development', nil)
-end
+    desc 'Migrate production database to latest version'
+    task :prod do
+      migrate.call('production', nil)
+    end
+  end
 
-desc 'Migrate development database to all the way down'
-task :dev_down do
-  migrate.call('development', 0)
-end
+  namespace :rollback do
+    desc 'Migrate test database all the way down'
+    task :test do
+      migrate.call('test', 0)
+    end
 
-desc 'Migrate development database all the way down and then back up'
-task :dev_bounce do
-  migrate.call('development', 0)
-  Sequel::Migrator.apply(DB, 'migrate')
-end
+    desc 'Migrate development database to all the way down'
+    task :dev do
+      migrate.call('development', 0)
+    end
+  end
 
-desc 'Migrate production database to latest version'
-task :prod_up do
-  migrate.call('production', nil)
+  namespace :reset do
+    desc 'Migrate test database all the way down and then back up'
+    task :test do
+      migrate.call('test', 0)
+      Sequel::Migrator.apply(DB, 'migrate')
+    end
+
+    desc 'Migrate development database all the way down and then back up'
+    task :dev do
+      migrate.call('development', 0)
+      Sequel::Migrator.apply(DB, 'migrate')
+    end
+  end
 end
 
 # Shell
