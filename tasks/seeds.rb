@@ -11,12 +11,12 @@ def seed!
   ).save
 
 
-  polaris = Vehicle.new(brand: 'Polaris', model: 'RZR XP 1000', type: 'UTV').save
-  brp = Vehicle.new(brand: 'BRP', model: 'Maverick X3', type: 'UTV Turbo').save
+  polaris = Vehicle.new(brand: 'Polaris', model: 'RZR XP 1000').save
+  brp = Vehicle.new(brand: 'BRP', model: 'Maverick X3').save
 
-  v = Racer.new(name: 'Vlad', number: 11, vehicle: polaris).save
-  p = Racer.new(name: 'Petya', number: 93, vehicle: polaris).save
-  y = Racer.new(name: 'Yura', number: 111, vehicle: brp).save
+  v = Racer.new(name: 'Vlad', number: 11, vehicle: polaris, klass: 'UTV').save
+  p = Racer.new(name: 'Petya', number: 93, vehicle: polaris, klass: 'UTV').save
+  y = Racer.new(name: 'Yura', number: 111, vehicle: brp, klass: 'UTV Turbo').save
 
   s.add_racer(v)
   s.add_racer(p)

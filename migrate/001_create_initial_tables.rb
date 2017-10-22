@@ -13,7 +13,6 @@ Sequel.migration do
       primary_key :id
       column :brand, String, text: false, null: false
       column :model, String, text: false, null: false
-      column :type, String, text: false, null: false
 
       unique %i[brand model]
     end
@@ -23,10 +22,11 @@ Sequel.migration do
       column :name, String, text: false, null: false
       column :nickname, String, text: false
       column :number, Integer, null: false
+      column :klass, String, text: false, null: false
 
-      foreign_key :vehicle_id, :vehicles, null: false
+      foreign_key :vehicle_id, :vehicles
 
-      unique %i[name number]
+      unique %i[name number vehicle_id]
     end
 
     create_table(:racers_stages) do

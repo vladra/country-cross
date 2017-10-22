@@ -1,6 +1,6 @@
 module Utilities
   class TimeHelpers
-    REGEX = /((?<hr>\d{1,2}):)?(?<min>\d{1,2}):(?<sec>\d{2}).(?<ms>\d{2,3})/.freeze
+    REGEX = /((?<hr>\d{1,2}):)?(?<min>\d{1,2}):(?<sec>\d{2})\.|\,(?<ms>\d{2,3})/.freeze
 
     def time_to_ms(time)
       match = time.match(REGEX)
