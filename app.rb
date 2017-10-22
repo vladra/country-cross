@@ -2,6 +2,7 @@ require_relative 'config/init'
 require 'pry' if dev?
 
 require_relative 'lib/gql/schema'
+require 'rack/cors'
 require 'roda'
 
 class App < Roda
@@ -13,6 +14,13 @@ class App < Roda
          'X-Content-Type-Options' => 'nosniff',
          'X-XSS-Protection' => '1; mode=block'
 
+  use Rack::Cors do
+    allow do
+      origins '*'
+      resource '*', headers: :any, methods: %i[get post options]
+    end
+  end
+
   use Rack::Session::Cookie,
       key: '_country_cross',
       secret: '05c9f975b1d9394b6603d9483ee15d43'
@@ -20,7 +28,7 @@ class App < Roda
   plugin :json
 
   route do |r|
-    r.post 'gql' do
+    r.post 'graphql' do
       params = JSON.parse(r.body.read)
 
       query = params['query']
@@ -29,10 +37,6 @@ class App < Roda
       result = GQL::Schema.execute(query, variables: variables)
 
       result.to_json
-    end
-
-    r.root do
-      view 'index'
     end
   end
 end

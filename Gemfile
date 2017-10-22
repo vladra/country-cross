@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '2.4.1'
 
 # App stack
+gem 'rack-cors'
 gem 'rack_csrf'
 gem 'roda'
 
