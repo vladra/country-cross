@@ -6,4 +6,5 @@ GQL::Types::VehicleType = GraphQL::ObjectType.define do
   field :id, !types.ID
   field :brand, !types.String
   field :model, !types.String
+  field :type, !types.String
 end

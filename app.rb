@@ -17,17 +17,17 @@ class App < Roda
       key: '_country_cross',
       secret: '05c9f975b1d9394b6603d9483ee15d43'
 
+  plugin :json
+
   route do |r|
-
     r.post 'gql' do
-      params = JSON.parse(request.body.read)
+      params = JSON.parse(r.body.read)
 
-      query = params['q']
-      variables = JSON.parse(params['v'] || {})
+      query = params['query']
+      variables = params['variables']
 
       result = GQL::Schema.execute(query, variables: variables)
 
-      response['Content-Type'] = 'application/json'
       result.to_json
     end
 
