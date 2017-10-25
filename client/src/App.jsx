@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { StageTable, StagesIndexTable } from './components/stages';
+import { Body } from 'components/Layout';
+import { StageTable, StagesIndexTable } from 'components/Stages';
 
+// eslint-disable-next-line
 class App extends Component {
   render() {
-    console.log(StageTable)
     return (
       <Router>
-        <div>
-          <Route path="/" component={StagesIndexTable} />
-          <Route path="/stages/" component={StageTable} />
-        </div>
+        <Body>
+          <Route exact path="/" component={StagesIndexTable} />
+          <Route path="/stages/:id" component={StageTable} />
+        </Body>
       </Router>
     );
   }

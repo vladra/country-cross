@@ -7,8 +7,9 @@ GQL::Types::RacerType = GraphQL::ObjectType.define do
   field :name, !types.String
   field :nickname, !types.String
   field :number, !types.Int
-  field :vehicle, GQL::Types::VehicleType
+  field :klass, !types.String
 
+  field :vehicle, GQL::Types::VehicleType
   field :stages, types[!GQL::Types::StageType]
   field :laps, types[!GQL::Types::LapType]
 

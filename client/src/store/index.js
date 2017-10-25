@@ -16,7 +16,11 @@ const store = createStore(
     stages,
     gql: client.reducer(),
   }),
-  {},
+  {
+    gql: {
+      loading: false,
+    },
+  },
   compose(applyMiddleware(client.middleware())),
 );
 

@@ -1,26 +1,27 @@
 import { gql } from 'react-apollo';
 
 const FetchStages = gql`
-  query {
+  query FetchStages {
     all_stages {
       id
       name
       date
+      location
     }
   }
 `;
 
 
 const GetStage = gql`
-  query {
+  query GetStage($id: ID!) {
     stage(id: $id) {
       id
       name
       date
       laps_amount
       lap_distance
-      laps { id number time time_h racer_id }
-      racers { id name number klass vehicle { id name }}
+      laps { id number time h_time racer_id }
+      racers { id name number klass vehicle { id brand model }}
     }
   }
 `;

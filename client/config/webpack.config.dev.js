@@ -86,10 +86,13 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
+      components: path.resolve('./src/components'),
+      store: path.resolve('./src/store'),
+      utils: path.resolve('./src/utils'),
+      gql: path.resolve('./src/graphql'),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
